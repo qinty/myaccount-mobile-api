@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateShoppersTable extends Migration
 {
@@ -19,7 +19,7 @@ class CreateShoppersTable extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('zip');
-            $table->string('country');
+            $table->integer('country_id');
             $table->string('state');
             $table->string('phone');
             $table->string('email')->unique();

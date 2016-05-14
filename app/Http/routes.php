@@ -16,5 +16,5 @@
 //});
 
 
-Route::resource('api/users', 'UserController');
-Route::resource('api/login', 'LoginController');
+Route::resource('api/users', 'ShopperController');
+Route::resource('api/device', 'DeviceController');

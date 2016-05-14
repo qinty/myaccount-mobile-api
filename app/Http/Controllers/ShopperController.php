@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use app\Api\ApiClient;
 use App\Http\Requests;
+use App\Models\Shopper;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class ShopperController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Shopper::with(['country', 'cards'])->get());
     }
 
     /**
@@ -37,14 +37,7 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $username = $request->input('username');
-        $password = md5($request->input('password'));
-        try {
-            $client = new ApiClient($username, $password);
-        } catch (\Exception $e) {
-            var_dump($e->getMessage());
-
-        }
+        //
     }
 
     /**
