@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class SubscriptionsController extends Controller
@@ -14,7 +15,7 @@ class SubscriptionsController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Subscription::all());
     }
 
     /**

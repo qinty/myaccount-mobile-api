@@ -15,7 +15,7 @@ class ShopperController extends Controller
      */
     public function index()
     {
-        return response()->json(Shopper::with(['country', 'cards'])->get());
+        return response()->json(Shopper::with(['country', 'cards', 'subscriptions'])->get());
     }
 
     /**
