@@ -16,8 +16,7 @@ class SubscriptionsController extends Controller
      */
     public function index(Request $request)
     {
-        $username = $request->header('x-auth-user');
-        $password = md5($request->header('x-auth-key'));
+        $username = $request->input('username');
         try {
 
             $shopper = Shopper::where('email', $username)->first();

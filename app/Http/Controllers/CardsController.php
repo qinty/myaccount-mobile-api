@@ -84,7 +84,7 @@ class CardsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user        = $request->header('x-auth-user');
+        $user        = $request->input('username');
         $shopper     = Shopper::where('email', $user)->first();
         $card        = Card::find($id);
         $month       = $request->input('month');

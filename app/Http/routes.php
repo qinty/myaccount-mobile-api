@@ -18,7 +18,7 @@
 
 Route::group(['middleware' => 'web'], function () {
     Route::group(['middleware' => 'cors'], function () {
-        Route::get('api/login', 'LoginController@store');
+        Route::get('api/login', 'LoginController@login');
         Route::get('api/devices', 'DeviceController@store');
         Route::get('api/subscriptions', 'SubscriptionsController@index');
         Route::get('api/cards-get', 'CardsController@index');

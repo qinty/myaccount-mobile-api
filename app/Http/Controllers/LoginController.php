@@ -36,7 +36,7 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function login(Request $request)
     {
         $username = $request->input('username');
         $password = md5($request->input('password'));

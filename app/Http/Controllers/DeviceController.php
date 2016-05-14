@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use app\Api\ApiClient;
 use App\Http\Requests;
 use App\Models\Device;
 use App\Models\Shopper;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\App;
 
 class DeviceController extends Controller
 {
@@ -41,26 +38,20 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        $username = $request->header('x-auth-user');
-        $password = md5($request->header('x-auth-key'));
-        try {
-            $client = new ApiClient($username, $password);
-            $shopper     = Shopper::where('email', $username)->first();
-            $deviceToken = $request->input('token');
-            if (!empty($shopper) && !empty($deviceToken)) {
+        $username    = $request->input('username');
+        $shopper     = Shopper::where('email', $username)->first();
+        $deviceToken = $request->input('token');
+        if (!empty($shopper) && !empty($deviceToken)) {
 
-                $device             = new Device();
-                $device->shopper_id = $shopper->id;
-                $device->token      = $deviceToken;
-                $device->active     = 1;
-                $device->save();
+            $device             = new Device();
+            $device->shopper_id = $shopper->id;
+            $device->token      = $deviceToken;
+            $device->active     = 1;
+            $device->save();
 
-                return response()->json($device->id);
-            } else {
-                return response('{"error":"Invalid arguments"}', 500);
-            }
-        } catch (\Exception $e) {
-            return response('{"error":"'.$e->getMessage().'"}', 500);
+            return response()->json($device->id);
+        } else {
+            return response('{"error":"Invalid arguments"}', 500);
         }
 
     }
