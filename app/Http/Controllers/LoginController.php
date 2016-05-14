@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use app\Api\ApiClient;
 use App\Http\Requests;
 use App\Models\Shopper;
 use Illuminate\Http\Request;
 
-class ShopperController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,6 +38,20 @@ class ShopperController extends Controller
      */
     public function store(Request $request)
     {
+        $username = $request->header('x-auth-user');
+        $password = md5($request->header('x-auth-key'));
+        try {
+            $client = new ApiClient($username, $password);
+            $shopper     = Shopper::with(['country'])->where('email', $username)->first();
+            if (!empty($shopper)) {
+                return response()->json($shopper);
+            } else {
+                return response('{"error":"Invalid arguments"}', 500);
+            }
+        } catch (\Exception $e) {
+            return response('{"error":"'.$e->getMessage().'"}', 500);
+        }
+
     }
 
     /**
