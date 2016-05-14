@@ -16,8 +16,7 @@ class CardsController extends Controller
      */
     public function index(Request $request)
     {
-        $user = $request->header('x-auth-user');
-
+        $user    = $request->header('x-auth-user');
         $shopper = Shopper::where('email', $user)->first();
 
         if (!empty($shopper)) {
@@ -85,7 +84,26 @@ class CardsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user        = $request->header('x-auth-user');
+        $shopper     = Shopper::where('email', $user)->first();
+        $card        = Card::find($id);
+        $month       = $request->input('month');
+        $year        = $request->input('year');
+        $date        = strtotime($year . '-' . $month . '-01');
+
+        $currentDate = time();
+        $validDate   = $date > $currentDate;
+
+        if (!empty($shopper) && !empty($card) && !empty($month) && !empty($year) && $validDate) {
+            $card->expirationMonth = sprintf('%02d', $month);
+            $card->expirationYear  = sprintf('%02d', $year);
+            $card->save();
+            return response()->json(Card::where('shopper_id', $shopper->id)->get());
+        } else {
+            return response('{"error":"Invalid arguments"}', 500);
+        }
+
+
     }
 
     /**
