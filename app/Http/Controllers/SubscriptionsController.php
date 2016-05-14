@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Models\Shopper;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,24 @@ class SubscriptionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Subscription::all());
+        $username = $request->header('x-auth-user');
+        $password = md5($request->header('x-auth-key'));
+        try {
+
+            $shopper = Shopper::where('email', $username)->first();
+
+            if (!empty($shopper)) {
+
+                return response()->json(Subscription::where('shopper_id', $shopper->id)->get());
+            } else {
+                return response('{"error":"Invalid arguments"}', 500);
+            }
+        } catch (\Exception $e) {
+            return response('{"error":"' . $e->getMessage() . '"}', 500);
+        }
+
     }
 
     /**

@@ -17,5 +17,5 @@
 
 
 Route::resource('api/shoppers', 'ShopperController');
-Route::resource('api/device', 'DeviceController');
+Route::resource('api/devices', 'DeviceController');
 Route::resource('api/subscriptions', 'SubscriptionsController');
