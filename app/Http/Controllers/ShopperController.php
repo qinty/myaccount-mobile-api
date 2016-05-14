@@ -37,7 +37,12 @@ class ShopperController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $username = $request->header('x-auth-user');
+        $shopper  = Shopper::where('email', $username)->first();
+        if ($shopper) {
+            return response()->json($shopper);
+        }
+
     }
 
     /**
