@@ -21,7 +21,7 @@ class CardController extends Controller
 
         if (!empty($shopper)) {
 
-            return response()->json(Card::where('shopper_id', $shopper->id)->get());
+            return response()->json(Card::where('shopper_id', $shopper->id)->orderBy('id', 'desc')->get());
         } else {
             return response('{"error":"Invalid arguments"}', 500);
         }
@@ -76,7 +76,7 @@ class CardController extends Controller
                 $card->image = 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/images/mastercard.jpg';
             }
             $card->save();
-            return response()->json(Card::all());
+            return response()->json(Card::orderBy('id', 'desc')->get());
         } else {
             return response('{"error":"Invalid arguments"}', 500);
         }
@@ -152,8 +152,18 @@ class CardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $user    = $request->input('username');
+        $shopper = Shopper::where('email', $user)->first();
+        $card    = Card::find($id);
+
+        if (!empty($shopper) && !empty($card)) {
+            $card->delete();
+            return response()->json(Card::orderBy('id', 'desc')->get());
+        } else {
+            return response('{"error":"Invalid arguments"}', 500);
+        }
+
     }
 }

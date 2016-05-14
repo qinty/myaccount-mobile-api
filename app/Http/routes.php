@@ -27,6 +27,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('api/cards/{id}', 'CardController@show');
         Route::get('api/cards-add', 'CardController@store');
         Route::get('api/cards-update/{id}', 'CardController@update');
+        Route::get('api/cards-delete/{id}', 'CardController@destroy');
         Route::get('api/shoppers-update/{id}', 'ShopperController@update');
     });
 });
