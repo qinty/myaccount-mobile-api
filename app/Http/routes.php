@@ -20,3 +20,4 @@ Route::resource('api/login', 'LoginController');
 Route::resource('api/shoppers', 'ShopperController');
 Route::resource('api/devices', 'DeviceController');
 Route::resource('api/subscriptions', 'SubscriptionsController');
+Route::resource('api/cards', 'CardsController');
