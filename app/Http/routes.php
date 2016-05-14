@@ -19,12 +19,14 @@
 Route::group(['middleware' => 'web'], function () {
     Route::group(['middleware' => 'cors'], function () {
         Route::get('api/login', 'LoginController@login');
+        Route::get('api/countries', 'CountryController@index');
         Route::get('api/devices', 'DeviceController@store');
         Route::get('api/subscriptions', 'SubscriptionsController@index');
         Route::get('api/subscriptions/{id}', 'SubscriptionsController@show');
-        Route::get('api/cards', 'CardsController@index');
-        Route::get('api/cards/{id}', 'CardsController@show');
-        Route::get('api/cards-update/{id}', 'CardsController@update');
+        Route::get('api/cards', 'CardController@index');
+        Route::get('api/cards/{id}', 'CardController@show');
+        Route::get('api/cards-update/{id}', 'CardController@update');
+        Route::get('api/shoppers-update/{id}', 'ShopperController@update');
     });
 });
 
