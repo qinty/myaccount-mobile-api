@@ -4,9 +4,31 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c284a9c122da36c99a8b6597bdce7aa6",
-    "content-hash": "8b1485987e7c5949da82435d403e52e8",
+    "hash": "966f90325981eb8f244902e86e0847c0",
+    "content-hash": "a67454975a75c3a378a89bae00106018",
     "packages": [
+        {
+            "name": "avangate/avangate-php-jsonrpc-code-samples",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avangate/avangate-php-jsonrpc-code-samples.git",
+                "reference": "327a82eeab110a39a47042755def63629e20474c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avangate/avangate-php-jsonrpc-code-samples/zipball/327a82eeab110a39a47042755def63629e20474c",
+                "reference": "327a82eeab110a39a47042755def63629e20474c",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "JSON-RPC Code Samples for API v3.0",
+            "time": "2016-01-16 23:19:29"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -3006,7 +3028,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "avangate/avangate-php-jsonrpc-code-samples": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
