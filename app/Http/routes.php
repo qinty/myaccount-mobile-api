@@ -18,10 +18,11 @@
 
 Route::group(['middleware' => 'web'], function () {
     Route::group(['middleware' => 'cors'], function () {
-        Route::resource('api/login', 'LoginController');
-        Route::resource('api/shoppers', 'ShopperController');
-        Route::resource('api/devices', 'DeviceController');
-        Route::resource('api/subscriptions', 'SubscriptionsController');
+        Route::get('api/login', 'LoginController@store');
+        Route::get('api/devices', 'DeviceController@store');
+        Route::get('api/subscriptions', 'SubscriptionsController@index');
+        Route::get('api/cards-get', 'CardsController@index');
+        Route::get('api/cards-update/{id}', 'CardsController@update');
     });
 });
 
