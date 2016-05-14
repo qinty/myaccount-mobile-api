@@ -22,7 +22,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('api/devices', 'DeviceController@store');
         Route::get('api/subscriptions', 'SubscriptionsController@index');
         Route::get('api/subscriptions/{id}', 'SubscriptionsController@show');
-        Route::get('api/cards-get', 'CardsController@index');
+        Route::get('api/cards', 'CardsController@index');
+        Route::get('api/cards/{id}', 'CardsController@show');
         Route::get('api/cards-update/{id}', 'CardsController@update');
     });
 });

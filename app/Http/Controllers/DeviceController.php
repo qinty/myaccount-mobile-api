@@ -39,8 +39,8 @@ class DeviceController extends Controller
     public function store(Request $request)
     {
         $username    = $request->input('username');
-        $shopper     = Shopper::where('email', $username)->first();
         $deviceToken = $request->input('token');
+        $shopper     = Shopper::where('email', $username)->first();
         if (!empty($shopper) && !empty($deviceToken)) {
 
             $device             = new Device();

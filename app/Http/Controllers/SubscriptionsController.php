@@ -67,18 +67,13 @@ class SubscriptionsController extends Controller
     public function show(Request $request, $id)
     {
         $username = $request->input('username');
-        try {
+        $shopper = Shopper::where('email', $username)->first();
 
-            $shopper = Shopper::where('email', $username)->first();
+        if (!empty($shopper)) {
 
-            if (!empty($shopper)) {
-
-                return response()->json(Subscription::find($id));
-            } else {
-                return response('{"error":"Invalid arguments"}', 500);
-            }
-        } catch (\Exception $e) {
-            return response('{"error":"' . $e->getMessage() . '"}', 500);
+            return response()->json(Subscription::find($id));
+        } else {
+            return response('{"error":"Invalid arguments"}', 500);
         }
 
     }
