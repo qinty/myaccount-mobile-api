@@ -16,9 +16,9 @@ class CardsController extends Controller
      */
     public function index(Request $request)
     {
-        $username = $request->header('x-auth-user');
+        $userId = $request->query('');
 
-        $shopper = Shopper::where('email', $username)->first();
+        $shopper = Shopper::where('email', $userId)->first();
 
         if (!empty($shopper)) {
 
