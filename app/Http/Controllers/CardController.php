@@ -47,7 +47,40 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user    = $request->input('username');
+        $shopper = Shopper::where('email', $user)->first();
+
+        $type        = strtoupper($request->input('cardType'));
+        $number      = $request->input('cardNumber');
+        $firstDigits = substr($number, 0, 4);
+        $lastDigits  = substr($number, -4);
+        $month       = $request->input('expiryMonth');
+        $year        = $request->input('expiryYear');
+
+        $date = strtotime($year . '-' . $month . '-01');
+
+        $currentDate = time();
+        $validDate   = $date > $currentDate;
+
+        if (!empty($shopper) && !empty($type) && !empty($number) && !empty($month) && !empty($year) && $validDate) {
+            $card                  = new Card();
+            $card->cardType        = $type;
+            $card->firstDigits     = $firstDigits;
+            $card->lastDigits      = $lastDigits;
+            $card->expirationMonth = sprintf('%02d', $month);
+            $card->expirationYear  = sprintf('%02d', $year);
+
+            if ($type == 'VISA') {
+                $card->image = 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/images/visa.jpg';
+            } else {
+                $card->image = 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/images/mastercard.jpg';
+            }
+            $card->save();
+            return response()->json(Card::all());
+        } else {
+            return response('{"error":"Invalid arguments"}', 500);
+        }
+
     }
 
     /**
@@ -95,8 +128,8 @@ class CardController extends Controller
         $user    = $request->input('username');
         $shopper = Shopper::where('email', $user)->first();
         $card    = Card::find($id);
-        $month   = $request->input('month');
-        $year    = $request->input('year');
+        $month   = $request->input('expiryMonth');
+        $year    = $request->input('expiryYear');
         $date    = strtotime($year . '-' . $month . '-01');
 
         $currentDate = time();
@@ -110,8 +143,6 @@ class CardController extends Controller
         } else {
             return response('{"error":"Invalid arguments"}', 500);
         }
-
-
     }
 
     /**

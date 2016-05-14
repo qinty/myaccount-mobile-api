@@ -19,6 +19,7 @@ class CreateCardsTable extends Migration
             $table->char('lastDigits', 4);
             $table->char('expirationMonth', 2);
             $table->char('expirationYear', 4);
+            $table->string('image');
             $table->integer('shopper_id');
             $table->timestamps();
         });
