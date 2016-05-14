@@ -73,7 +73,39 @@ class ShopperController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user    = $request->input('username');
+        $shopper = Shopper::where('email', $user)->first();
+
+        $firstName  = $request->input('firstName');
+        $lastName   = $request->input('lastName');
+        $country_id = $request->input('country');
+        $city       = $request->input('city');
+        $address    = $request->input('address');
+
+        if (!empty($shopper)) {
+            if (!empty($firstName)) {
+                $shopper->firstName = $firstName;
+            }
+            if (!empty($lastName)) {
+                $shopper->lastName = $lastName;
+            }
+            if (!empty($country_id)) {
+                $shopper->country_id = $country_id;
+            }
+            if (!empty($city)) {
+                $shopper->city = $city;
+            }
+            if (!empty($address)) {
+                $shopper->address = $address;
+            }
+
+            $shopper->save();
+
+            return response()->json(Shopper::find($shopper->id));
+        } else {
+            return response('{"error":"Invalid arguments"}', 500);
+        }
+
     }
 
     /**

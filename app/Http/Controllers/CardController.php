@@ -7,7 +7,7 @@ use App\Models\Card;
 use App\Models\Shopper;
 use Illuminate\Http\Request;
 
-class CardsController extends Controller
+class CardController extends Controller
 {
     /**
      * Display a listing of the resource.
